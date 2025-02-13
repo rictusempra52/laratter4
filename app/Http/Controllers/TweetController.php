@@ -36,6 +36,16 @@ class TweetController extends Controller
         $request->validate([
             'tweet' => 'required|max:140',
         ]);
+
+        // ログインしているユーザーのツイートを作成
+        // $request->user() は現在ログインしているユーザーを取得
+        // tweets() はユーザーが持つツイートのリレーションを取得
+        // create() メソッドで新しいツイートを作成し、データベースに保存
+        // $request->only('tweet') はリクエストから 'tweet' フィールドのみを取得
+        $request->user()->tweets()->create($request->only('tweet'));
+
+        // ツイート一覧ページにリダイレクト
+        return redirect()->route('tweets.index');
     }
 
     /**
