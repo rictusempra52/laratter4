@@ -14,6 +14,7 @@ class TweetController extends Controller
     {
         // ユーザー情報を含むツイートを最新のものから順に取得し、ビューに渡す
         $tweets = Tweet::with('user')->latest()->get();
+        // ツイート一覧ページを表示
         return view('tweets.index', compact('tweets'));
     }
 
@@ -23,7 +24,7 @@ class TweetController extends Controller
     public function create()
     {
         // ツイート作成ページを表示
-        return view('tweets.create');
+        return view('tweets.create', compact('tweets'));
     }
 
     /**
