@@ -21,10 +21,10 @@ class TweetController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Tweet $tweet)
     {
         // ツイート作成ページを表示
-        return view('tweets.create', compact('tweets'));
+        return view('tweets.create', compact('tweet'));
     }
 
     /**
@@ -61,26 +61,40 @@ class TweetController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * ツイートを編集するためのフォームを表示するメソッド。
      */
     public function edit(Tweet $tweet)
     {
-        //
+        // ツイート編集ページを表示
+        return view('tweets.edit', compact('tweet'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * ツイートを更新するメソッド。
      */
     public function update(Request $request, Tweet $tweet)
     {
-        //
+        // バリデーション
+        $request->validate([
+            'tweet' => 'required|max:140',
+        ]);
+
+        // ツイートを更新
+        $tweet->update($request->only('tweet'));
+
+        // ツイート詳細ページにリダイレクト
+        return redirect()->route('tweets.show', $tweet);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * ツイートを削除するメソッド。
      */
     public function destroy(Tweet $tweet)
     {
-        //
+        // ツイートを削除
+        $tweet->delete();
+
+        // ツイート一覧ページにリダイレクト
+        return redirect()->route('tweets.index');
     }
 }
