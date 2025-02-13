@@ -49,11 +49,15 @@ class TweetController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * ツイート詳細ページを表示するメソッド。
+     * 
+     * このメソッドは、指定されたツイートの詳細情報を表示するためのビューを返します。
+     * @param Tweet $tweet ツイートモデルのインスタンス
+     * @return \Illuminate\View\View ツイート詳細ページのビューを返します。
      */
     public function show(Tweet $tweet)
     {
-        //
+        return view('tweets.show', compact('tweet'));
     }
 
     /**
