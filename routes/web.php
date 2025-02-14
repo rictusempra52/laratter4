@@ -7,6 +7,3 @@ use App\Http\Controllers\LikeController;
 Route::get('/', [TweetController::class, 'index'])->name('home');
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->name('dashboard');
-Route::resource('likes', LikeController::class);
-Route::resource('tweets', TweetController::class);

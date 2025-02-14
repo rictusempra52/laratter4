@@ -4,8 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-
 class Tweet extends Model
 {
     /** @use HasFactory<\Database\Factories\TweetFactory> */
@@ -21,10 +19,6 @@ class Tweet extends Model
         return $this->belongsTo(User::class);
     }
 
-    // TweetとLikeのリレーションを定義
-    public function liked(): HasMany
-    {
-        // 1つのTweetは複数のLikeを持つ
-        return $this->hasMany(Like::class);
+
     }
 }
