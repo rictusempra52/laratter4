@@ -2,29 +2,62 @@
 
 namespace App\Models;
 
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory;
+    /** @use HasFactory<\Database\Factories\UserFactory> */
+    use HasFactory, Notifiable;
 
-    // フィールドの定義
-    protected $fillable = ['name', 'email', 'password'];
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var list<string>
+     */
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+    ];
 
-    // UserとTweetのリレーションを定義
-    public function tweets(): HasMany
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var list<string>
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
     {
-        // 1人のUserは複数のTweetを持つ
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+        ];
+    }
+
+    // Define the relationship between User and Tweet
+    public function tweets()
+    {
+        // A user has many tweets
         return $this->hasMany(Tweet::class);
     }
 
-    // UserとLikeのリレーションを定義　
-    public function likes(): HasMany
+    // Define the relationship between User and Tweet
+    public function likedTweets()
     {
-        // 1人のUserは複数のLikeを持つ
-        return $this->hasMany(Like::class);
+        // A user has many liked tweets
+        return $this->belongsToMany(Tweet::class)->withTimestamps();
     }
 
     // Define the relationship between User and Tweet

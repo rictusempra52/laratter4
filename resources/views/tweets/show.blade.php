@@ -19,13 +19,7 @@
                     <div class="text-gray-600 dark:text-gray-400 text-sm mt-2">
                         <p>作成日時: {{ $tweet->created_at->format('Y-m-d H:i') }}</p>
                         <p>更新日時: {{ $tweet->updated_at->format('Y-m-d H:i') }}</p>
-                        <!-- いいねボタン -->
-                    <form action="{{ route('likes.store') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="tweet_id" value="{{ $tweet->id }}">
-                        <button type="submit" class="text-blue-500 hover:text-blue-700">いいね</button>
-                    </form>
-                </div>
+                    </div>
                     @if (auth()->id() == $tweet->user_id)
                         <div class="flex mt-4 space-x-2">
                             <a href="{{ route('tweets.edit', $tweet) }}" class="link mr-2">編集</a>
