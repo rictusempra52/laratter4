@@ -22,7 +22,7 @@ class Tweet extends Model
     }
 
     // TweetとLikeのリレーションを定義
-    public function likes(): HasMany
+    public function liked(): HasMany
     {
         // 1つのTweetは複数のLikeを持つ
         return $this->hasMany(Like::class);

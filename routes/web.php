@@ -1,24 +1,12 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\TweetController;
 use Illuminate\Support\Facades\Route;
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
+use App\Http\Controllers\TweetController;
+use App\Http\Controllers\LikeController;
+Route::get('/', [TweetController::class, 'index'])->name('home');
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-    // Define the resource route for tweets
-    Route::resource('tweets', TweetController::class);
-});
-
-require __DIR__ . '/auth.php';
+})->name('dashboard');
+Route::resource('likes', LikeController::class);
+Route::resource('tweets', TweetController::class);

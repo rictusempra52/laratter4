@@ -3,10 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class User extends Model
+class User extends Authenticatable
 {
     use HasFactory;
 
@@ -20,7 +20,7 @@ class User extends Model
         return $this->hasMany(Tweet::class);
     }
 
-    // UserとLikeのリレーションを定義
+    // UserとLikeのリレーションを定義　
     public function likes(): HasMany
     {
         // 1人のUserは複数のLikeを持つ
