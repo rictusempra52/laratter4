@@ -4,12 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-<<<<<<< HEAD
-=======
 use Illuminate\Support\Facades\Auth;
 
 
->>>>>>> 4週目完了
 class Tweet extends Model
 {
     /** @use HasFactory<\Database\Factories\TweetFactory> */
@@ -24,9 +21,6 @@ class Tweet extends Model
         return $this->belongsTo(User::class);
     }
 
-<<<<<<< HEAD
-
-=======
     /** いいねをしたユーザーを取得する
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
@@ -36,6 +30,5 @@ class Tweet extends Model
         // belongsToManyメソッドを使用して多対多の関係を定義
         // withTimestampsメソッドを使用して、関連するタイムスタンプを自動的に管理
         return $this->belongsToMany(User::class)->withTimestamps();
->>>>>>> 4週目完了
     }
 }

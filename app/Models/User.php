@@ -59,11 +59,4 @@ class User extends Authenticatable
         // A user has many liked tweets
         return $this->belongsToMany(Tweet::class)->withTimestamps();
     }
-
-    // Define the relationship between User and Tweet
-    public function likedTweets()
-    {
-        // A user has many liked tweets
-        return $this->belongsToMany(Tweet::class)->withTimestamps();
-    }
 }
